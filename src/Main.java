@@ -18,7 +18,7 @@ public class Main {
         String[] array = inputText1.split(" ");
 
         //пишем массив в коллекцию
-        ArrayList<String> arrayList = new ArrayList(Arrays.asList(array));
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
 
         //Задание 1 подсчитать количество различных слов в файле:
         Set<String> set = new LinkedHashSet<>(arrayList);
