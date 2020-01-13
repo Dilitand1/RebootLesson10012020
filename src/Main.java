@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Main {
+
     public static void main(String[] args) {
         //входной текст
         String inputText = "В траве сидел кузнечик, в траве сидел кузнечик, \n" +
@@ -64,7 +65,17 @@ public class Main {
 
         //Задание 5. Реализуйте свой итератор для обхода списка в обратном порядке:
         System.out.println("Задание 5. Обратный итератор: ");
-        reverseIterator(arrayList/*,"Совсем"*/);
+        ReverseIterator ri = new ReverseIterator(arrayList);
+        while (ri.hasNext()){
+            String s = ri.next().toString();
+            if (s.equals("В")){
+                ri.remove();
+            }
+            else
+            {
+                System.out.println(s);
+            }
+        }
         System.out.println();
 
         //Задание 6. Вывести строки в порядке заданном пользователем
@@ -86,7 +97,8 @@ public class Main {
     }
     //метод использования итератора в обратном порядке, в параметры метода передается список и
     // , при необходимости, элементы для удаления
-    private static void reverseIterator(List list, String... stringsToRemove){
+    //Реализовано через класс
+/*    private static void reverseIterator(List list, String... stringsToRemove){
         Collections.reverse(list);
         Iterator iterator = list.iterator();
         while (iterator.hasNext()){
@@ -100,5 +112,52 @@ public class Main {
             }
         }
         Collections.reverse(list);
+    }*/
+}
+
+//Реалзиация компаратора в отдельном классе
+class StringComparator implements Comparator{
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        //сначала сверяем по длине
+        if (o1.toString().length() == o2.toString().length()){
+            //если равны то сверяем по строке
+            return o1.toString().compareTo(o2.toString());
+        }
+        //если не равны то только по длине
+        else
+        {
+            return o1.toString().length() - o2.toString().length();
+        }
     }
+}
+
+class ReverseIterator implements Iterator{
+
+    private List list;
+    private int counter;
+
+    ReverseIterator(List list){
+        this.list = list;
+        counter = list.size();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return counter > 0 && counter <= list.size();
+    }
+
+    @Override
+    public Object next() {
+      counter--;
+      return list.get(counter);
+    }
+
+    @Override
+    public void remove() {
+
+        list.remove(counter);
+    }
+
 }
