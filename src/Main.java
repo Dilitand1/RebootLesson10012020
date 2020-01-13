@@ -17,6 +17,9 @@ public class Main {
         //Создаем массив из слов:
         String[] array = inputText1.split(" ");
 
+
+
+
         //пишем массив в коллекцию
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
 
@@ -66,6 +69,7 @@ public class Main {
         //Задание 5. Реализуйте свой итератор для обхода списка в обратном порядке:
         System.out.println("Задание 5. Обратный итератор: ");
         ReverseIterator ri = new ReverseIterator(arrayList);
+        ListIterator<String> li = arrayList.listIterator();
         while (ri.hasNext()){
             String s = ri.next().toString();
             if (s.equals("В")){
